@@ -14,19 +14,19 @@ const corsOrigin = config.get<string>("corsOrigin");
 const app = express();
 const http = createServer(app);
 const io = new Server(http, {
-    cors: {
-        origin: corsOrigin,
-        credentials: true
-    }
+  cors: {
+    origin: corsOrigin,
+    credentials: true
+  }
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello World! v' + version);
-    }
+  res.send('Hello World! v' + version);
+  }
 );
 
 http.listen(port, host, () => {
-    logger.info(`Server ${version} listening on ${host}:${port}`);
-    logger.info(`http://${host}:${port}/`);
-    socket({ io});
+  logger.info(`Server ${version} listening on ${host}:${port}`);
+  logger.info(`http://${host}:${port}/`);
+  socket({ io});
 });

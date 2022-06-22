@@ -3,12 +3,12 @@ import pretty from 'pino-pretty';
 import dayjs from 'dayjs';
 
 const logger = pino({
-    transport: {
-        target: 'pino-pretty'
-    },
-    customPrettifiers: {
-        time: (timestamp : any) => `🕰 ${timestamp}`,
-    },
+  transport: {
+    target: 'pino-pretty'
+  },
+  customPrettifiers: {
+    time: (timestamp : any) => `🕰 ${timestamp}`,
+  },
 });
 
 export default logger;
