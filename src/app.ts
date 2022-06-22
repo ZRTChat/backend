@@ -3,6 +3,9 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import config from "config"; // Config file located in config/default.ts
+import logger from "./utils/logger";
+import {version} from "../package.json";
+import socket from "./socket";
 
 const port = config.get<number>("port");
 const host = config.get<string>("host");
@@ -18,10 +21,12 @@ const io = new Server(http, {
 });
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Hello World! v' + version);
     }
 );
 
 http.listen(port, host, () => {
-    console.log(`Server listening on ${host}:${port}`);
+    logger.info(`Server ${version} listening on ${host}:${port}`);
+    logger.info(`http://${host}:${port}/`);
+    socket({ io});
 });
