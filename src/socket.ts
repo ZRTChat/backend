@@ -1,6 +1,5 @@
 import { Server, Socket } from "socket.io";
 import logger from "./utils/logger";
-import { nanoid } from "nanoid";
 
 const EVENTS = {
   connection: "connection",
@@ -22,7 +21,7 @@ function socket({io}: { io:Server}) {
 
     socket.on(EVENTS.CLIENT.CREATE_CHANNEL, ({ channelName }) => {
       logger.info(`User ${socket.id} created channel ${channelName}`);
-      const channelID = nanoid()
+      const channelID = "1413";
 
       channels[channelID] = {
         name: channelName
