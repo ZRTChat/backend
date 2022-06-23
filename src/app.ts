@@ -9,7 +9,6 @@ const io = require('socket.io')(http, {
 
 io.on("connection", (socket: Socket) => {
   logger.info(`User connected: ${socket.id}`);
-  socket.emit("message", "Hello World");
   socket.on("message", (message: string) => {
     logger.info(`User ${socket.id} sent message: ${message}`);
     io.emit("message", message);
