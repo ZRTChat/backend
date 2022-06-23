@@ -2,6 +2,10 @@ import { Server, Socket } from "socket.io";
 import logger from "./utils/logger";
 import uniqid from 'uniqid';
 
+// A list of all channels
+const channels: Record<string, { name: string }> = {};
+
+// EVENTS is used to detect and handle different types of events from the client
 const EVENTS = {
   connection: "connection",
   CLIENT: {
@@ -13,8 +17,6 @@ const EVENTS = {
     JOINED_CHANNEL: "JOINED_CHANNEL",
   }
 }
-
-const channels: Record<string, { name: string }> = {};
 
 function socket({ io }: { io: Server }) {
   logger.info("Socket.io connected");
