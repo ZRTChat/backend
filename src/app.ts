@@ -27,5 +27,5 @@ app.get('/', (req, res) => {
 
 http.listen(port, host, () => {
   logger.info(`Server ${version} listening on http://${host}:${port}/`);
-  socket({ io});
+  socket({ io });
 });
