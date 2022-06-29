@@ -22,6 +22,6 @@ io.on("connection", (socket: Socket) => {
   });
 });
 
-http.listen(4444, () => {
-  logger.info("Listening on port 4444");
+http.listen(4000, () => {
+  logger.info("Listening on port 4000");
 });
