@@ -16,7 +16,7 @@ const EVENTS = {
     CHANNELS: "CHANNELS",
     JOINED_CHANNEL: "JOINED_CHANNEL",
   },
-  MESSAGE: {
+  USER: {
     SEND_MESSAGE: "SEND_MESSAGE"
   }
 }
@@ -27,9 +27,14 @@ function socket({ io }: { io: Server }) {
   io.on("connection", (socket: Socket) => {
     logger.info(`User connected: ${socket.id}`);
     
-    socket.on(EVENTS.MESSAGE.SEND_MESSAGE, ({ message, channelId }: { message: string, channelId: string }) => {
+    socket.on(EVENTS.CLIENT.SEND_CHANNEL_MESSAGE, ({ message, channelId }: { message: string, channelId: string }) => {
       logger.info(`Message received: ${message}`);
-      io.to(channelId).emit(EVENTS.MESSAGE.SEND_MESSAGE, { message, channelId });
+      io.to(channelId).emit(EVENTS.CLIENT.SEND_CHANNEL_MESSAGE, { message, channelId });
+    });
+
+    socket.on(EVENTS.USER.SEND_MESSAGE, ({ message, userId }: { message: string, userId: string }) => {
+      logger.info(`Message received: ${message}`);
+      io.to(userId).emit(EVENTS.USER.SEND_MESSAGE, { message, userId });
     });
 
     socket.on(EVENTS.CLIENT.CREATE_CHANNEL, ({ channelName }) => {
